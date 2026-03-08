@@ -13,7 +13,7 @@
     (list (shepherd-service
            (documentation "sing-box daemon.")
            (provision '(sing-box))
-           (requirement '(networking))
+           (requirement '(user-processes ,@shepherd-requirement))
            (start #~(make-forkexec-constructor
              (list #$(file-append sing-box "/bin/sing-box")
                "-D"
@@ -21,7 +21,7 @@
                "-C"
                "/etc/sing-box"
                "run")
-           #:log-file string "/var/log/sing-box.log"))
+             #:log-file string "/var/log/sing-box.log"))
            (stop #~(make-kill-destructor))))))
 
 (define sing-box-service-type
