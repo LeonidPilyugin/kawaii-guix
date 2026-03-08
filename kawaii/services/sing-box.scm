@@ -1,4 +1,4 @@
-(define-module (kawaii services vpn)
+(define-module (kawaii services sing-box)
   #:use-module (guix deprecation)
   #:use-module (guix gexp)
   #:use-module (gnu packages)

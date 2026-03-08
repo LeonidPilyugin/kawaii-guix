@@ -1,4 +1,4 @@
-(define-module (kawaii packages networking)
+(define-module (kawaii packages sing-box)
   ;; Utilities
   #:use-module (guix gexp)
   #:use-module ((guix licenses) #:prefix license:)
