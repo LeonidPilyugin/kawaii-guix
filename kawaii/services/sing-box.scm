@@ -15,7 +15,12 @@
            (provision '(sing-box))
            (requirement '(networking))
            (start #~(make-forkexec-constructor
-             '("/sbin/sing-box" "-D" "/tmp" "-C" "/etc/sing-box" "run")))
+             (list #$(file-append sing-box "/bin/sing-box")
+               "-D"
+               "/tmp"
+               "-C"
+               "/etc/sing-box"
+               "run")))
            (stop #~(make-kill-destructor))))))
 
 (define sing-box-service-type
