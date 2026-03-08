@@ -4,7 +4,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu services)
   #:use-module (gnu services shepherd)
-  #:use-module (kawaii packages vpn)
+  #:use-module (kawaii packages sing-box)
   #:export (sing-box-service-type
             sing-box-service))
 
