@@ -20,7 +20,8 @@
                "/tmp"
                "-C"
                "/etc/sing-box"
-               "run")))
+               "run"))
+           #:log-file "/var/log/sing-box.log")
            (stop #~(make-kill-destructor))))))
 
 (define sing-box-service-type
