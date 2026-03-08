@@ -21,7 +21,7 @@
                "-C"
                "/etc/sing-box"
                "run")
-             #:log-file string "/var/log/sing-box.log"))
+             #:log-file "/var/log/sing-box.log"))
            (stop #~(make-kill-destructor))
            (auto-start? #t)))))
 
