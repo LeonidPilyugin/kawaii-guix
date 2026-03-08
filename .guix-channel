@@ -1,4 +1,2 @@
 (channel
-  (version 0)
-  (news-file "news.txt")
-  (url "https://github.com/LeonidPilyugin/kawaii-guix"))
+  (version 0))
