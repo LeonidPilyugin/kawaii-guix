@@ -60,8 +60,8 @@
                     (commit (string-append "v" version))))
               (file-name (git-file-name name version))
               (sha256
-               (base64
-                "l9WN2HPXz5teS0rKVRZWjzsub1w9vJMkHIL/9eSmCf0="))))
+               (base32
+                "1i5zfafbc21m0hn0sysn2pqpkp0v84dzlz2haxli3pm4y7fdb8xs"))))
     (build-system go-build-system)
     (arguments
      (list
