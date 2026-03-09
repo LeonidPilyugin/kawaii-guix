@@ -80,6 +80,11 @@
                          "with_ech"
                          "with_acme"
                          "with_dhcp"))
+              "-mod=readonly"
+              "-modcacherw"
+              "-v"
+              "-trimpath"
+              "-buildmode=pie"
               (string-append
                "-ldflags="
                " -X github.com/sagernet/sing-box/constant.Version="
