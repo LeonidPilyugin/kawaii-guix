@@ -71,14 +71,14 @@
       #:import-path "./cmd/sing-box"
       #:build-flags
       #~(list "-tags" (string-join
-                       '("with_quic"
+                       '("with_gvisor"
+                         "with_quic"
                          "with_dhcp"
                          "with_wireguard"
-                         "with_tailscale"
                          "with_utls"
                          "with_acme"
                          "with_clash_api"
-                         "with_gvisor"))
+                         "with_tailscale"))
               (string-append
                "-ldflags="
                " -X github.com/sagernet/sing-box/constant.Version="
