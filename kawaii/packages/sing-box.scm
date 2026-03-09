@@ -52,7 +52,7 @@
 (define-public sing-box
   (package
     (name "sing-box")
-    (version "1.11.15")
+    (version "1.12.22")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -61,7 +61,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1i5zfafbc21m0hn0sysn2pqpkp0v84dzlz2haxli3pm4y7fdb8xs"))))
+                "0wr97myxdskqlh1mrpn0rnnvdkifaqnm420j3y6hbk9rf4ijzf3l"))))
     (build-system go-build-system)
     (arguments
      (list
@@ -71,20 +71,14 @@
       #:import-path "./cmd/sing-box"
       #:build-flags
       #~(list "-tags" (string-join
-                       '("with_gvisor"
-                         "with_quic"
+                       '("with_quic"
+                         "with_dhcp"
                          "with_wireguard"
+                         "with_tailscale"
                          "with_utls"
-                         "with_reality_server"
-                         "with_clash_api"
-                         "with_ech"
                          "with_acme"
-                         "with_dhcp"))
-              "-mod=readonly"
-              "-modcacherw"
-              "-v"
-              "-trimpath"
-              "-buildmode=pie"
+                         "with_clash_api"
+                         "with_gvisor"))
               (string-append
                "-ldflags="
                " -X github.com/sagernet/sing-box/constant.Version="
