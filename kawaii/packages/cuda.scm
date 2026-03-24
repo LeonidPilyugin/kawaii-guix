@@ -13,7 +13,6 @@
   #:use-module (guix build-system gnu)
   #:use-module (guix build-system trivial)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module ((guix licenses-nonfree) #:prefix nonfree:)
   #:use-module (gnu packages base)
   #:use-module (gnu packages bootstrap)
   #:use-module (gnu packages elf)
@@ -21,6 +20,23 @@
   #:use-module (gnu packages perl)
   #:use-module (gnu packages python)
   #:use-module (ice-9 match))
+
+(define license (@@ (guix licenses) license))
+
+(define artistic1.0
+  (license "Artistic License 1.0"
+           "http://www.perlfoundation.org/artistic_license_1_0"
+           "http://www.gnu.org/licenses/license-list.html#ArtisticLicense"))
+
+(define undeclared
+  (license "undeclared" "none" "No license has been declared."))
+
+(define* (non-free uri #:optional (comment ""))
+  "Return a license that does not fit any of the ones above or a collection of
+licenses, not approved as free by the FSF.  More details can be found at URI."
+  (license "non-free"
+           uri
+           comment))
 
 (define (make-cuda version origin)
   (package
@@ -123,7 +139,7 @@
      "This package provides the CUDA compiler and the CUDA run-time support
 libraries for NVIDIA GPUs, all of which are proprietary.")
     (home-page "https://developer.nvidia.com/cuda-toolkit")
-    (license (nonfree:non-free "https://developer.nvidia.com/nvidia-cuda-license"))
+    (license (non-free "https://developer.nvidia.com/nvidia-cuda-license"))
     (supported-systems '("x86_64-linux"))))
 
 (define-syntax-rule (cuda-source url hash)
