@@ -156,10 +156,10 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
               "https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run"
               "1i4xrsqbad283qffvysn88w2pmxzxbbby41lw0j1113z771akv4w")))
 
-(define-public cuda-13.2
+(define-public cuda-13.1
   (package
     (inherit cuda-8.0)
-    (version "13.2.0")
+    (version "13.1.1")
     (source
      (cuda-source
       "https://developer.download.nvidia.com/compute/cuda/13.1.1/local_installers/cuda_13.1.1_590.48.01_linux.run"
