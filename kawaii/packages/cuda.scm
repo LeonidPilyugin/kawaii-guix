@@ -156,6 +156,77 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
               "https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run"
               "1i4xrsqbad283qffvysn88w2pmxzxbbby41lw0j1113z771akv4w")))
 
+(define-public cuda-13.2
+  (package
+    (inherit cuda-8.0)
+    (version "13.2.0")
+    (source
+     (cuda-source
+      "https://developer.download.nvidia.com/compute/cuda/13.2.0/local_installers/cuda_13.2.0_580.142.06_linux.run"
+      "1mrrl9iwb62na987zsnksypxiz6wny4z1g77pmg393rcb18vd6f5"))
+    (outputs '("out"))                         ;XXX: no documentation for now
+    (arguments
+     (substitute-keyword-arguments (package-arguments cuda-8.0)
+       ((#:modules modules)
+        `((guix build utils)
+          (guix build gnu-build-system)
+          (ice-9 match)
+          (ice-9 ftw)))                           ;for 'scandir'
+       ((#:phases phases)
+        `(modify-phases ,phases
+           (replace 'unpack
+             (lambda* (#:key inputs #:allow-other-keys)
+               (define libc
+                 (assoc-ref inputs "libc"))
+               (define ld.so
+                 (string-append libc ,(glibc-dynamic-linker)))
+
+               (let ((source (assoc-ref inputs "source")))
+                 (invoke "sh" source "--keep" "--noexec")
+                 (chdir "pkg")
+                 #t)))
+           (add-after 'unpack 'remove-superfluous-stuff
+             (lambda _
+               ;; Remove things we have no use for.
+               (with-directory-excursion "builds"
+                 (for-each delete-file-recursively
+                           '("nsight_compute" "nsight_systems" "cuda_gdb")))
+               #t))
+           (replace 'install
+             (lambda* (#:key inputs outputs #:allow-other-keys)
+               (let ((out (assoc-ref outputs "out")))
+                 (define (copy-from-directory directory)
+                   (for-each (lambda (entry)
+                               (define sub-directory
+                                 (string-append directory "/" entry))
+
+                               (define target
+                                 (string-append out "/" (basename entry)))
+
+                               (when (file-exists? sub-directory)
+                                 (copy-recursively sub-directory target)))
+                             '("bin" "targets/x86_64-linux/lib"
+                               "targets/x86_64-linux/include"
+                               "nvvm/bin" "nvvm/include"
+                               "nvvm/lib64")))
+
+                 (setenv "COLUMNS" "200")         ;wide backtraces!
+                 (with-directory-excursion "builds"
+                   (for-each copy-from-directory
+                             (scandir "." (match-lambda
+                                            ((or "." "..") #f)
+                                            (_ #t))))
+
+                   ;; 'cicc' needs that directory.
+                   (copy-recursively "cuda_nvcc/nvvm/libdevice"
+                                     (string-append out "/nvvm/libdevice")))
+                 #t)))
+           ;; XXX: No documentation for now.
+           (delete 'move-documentation)))))
+    (native-inputs
+     `(("which" ,which)
+       ,@(package-native-inputs cuda-8.0)))))
+
 (define-public cuda-11.0
   (package
     (inherit cuda-8.0)
@@ -258,7 +329,7 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
   ;;
   ;; Note: Pick a version that matches the actual "driver"--i.e.,
   ;; /usr/lib64/libcuda.so available on the target machine.
-  cuda-10.2)
+  cuda-13.2)
 
 (define-public no-float128
   ;; FIXME: We cannot simply add it to 'propagated-inputs' of cuda-toolkit
