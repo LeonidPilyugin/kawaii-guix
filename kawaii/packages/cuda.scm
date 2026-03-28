@@ -192,33 +192,6 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
                  (for-each delete-file-recursively
                            '("nsight_compute" "nsight_systems" "cuda_gdb")))
                #t))
-           (replace 'install
-             (lambda* (#:key inputs outputs #:allow-other-keys)
-               (let ((out (assoc-ref outputs "out")))
-                 (define (copy-from-directory directory)
-                   (for-each (lambda (entry)
-                               (define sub-directory
-                                 (string-append directory "/" entry))
-
-                               (define target
-                                 (string-append out "/" (basename entry)))
-
-                               (when (file-exists? sub-directory)
-                                 (copy-recursively sub-directory target)))
-                             '("bin" "targets/x86_64-linux/lib"
-                               "targets/x86_64-linux/include")))
-
-                 (setenv "COLUMNS" "200")         ;wide backtraces!
-                 (with-directory-excursion "builds"
-                   (for-each copy-from-directory
-                             (scandir "." (match-lambda
-                                            ((or "." "..") #f)
-                                            (_ #t))))
-
-                   ;; 'cicc' needs that directory.
-                   (copy-recursively "cuda_nvcc/nvvm/libdevice"
-                                     (string-append out "/nvvm/libdevice")))
-                 #t)))
            ;; XXX: No documentation for now.
            (delete 'move-documentation)))))
     (native-inputs
