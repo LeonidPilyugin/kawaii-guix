@@ -206,8 +206,8 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
 
                                (when (file-exists? sub-directory)
                                  (copy-recursively sub-directory target)))
-                             '("bin" "targets/x86_64-linux/lib"
-                               "targets/x86_64-linux/include")))
+                             '("bin" "lib"
+                               "include")))
 
                  (setenv "COLUMNS" "200")         ;wide backtraces!
                  (with-directory-excursion "builds"
