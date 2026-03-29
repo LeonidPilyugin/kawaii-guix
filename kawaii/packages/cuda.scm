@@ -212,7 +212,7 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
                                    (define subdir (string-append sub-directory "/" entr))
                                    (define trgt (string-append target "/" (basename entr)))
                                    (copy-recursively subdir trgt))
-                                   (scandir sub-directory (match-lambda ((or "." ".." "lib64") #f) (_ #t))))))
+                                   (scandir sub-directory (match-lambda ((or "." ".." "lib64" "include") #f) (_ #t))))))
                              '("bin" "targets/x86_64-linux/lib"
                                "targets/x86_64-linux/include"
                                "nvvm/bin" "nvvm/include"
