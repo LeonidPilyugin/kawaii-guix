@@ -322,7 +322,7 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
   (make-cuda
     "13.1.1"
     (cuda-source
-     "https://developer.download.nvidia.com/compute/cuda/13.1.1/local_installers/cuda_13.1.1_590.48.01_linux.run""
+     "https://developer.download.nvidia.com/compute/cuda/13.1.1/local_installers/cuda_13.1.1_590.48.01_linux.run"
      "1r5qvyv0sb8rwb9rb040x46v8739iyj95cq4d11q29vj4cvk5zr4")
     #:gcc gcc-15))
 
