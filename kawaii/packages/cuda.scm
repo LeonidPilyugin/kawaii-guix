@@ -204,7 +204,7 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
                                (define target
                                  (string-append out "/" (basename entry)))
 
-                               ;; (when (not (file-exists? target)) (mkdir target #o755))
+                               (when (not (file-exists? target)) (mkdirat out (basename entry) #o755))
 
                                (when (file-exists? sub-directory)
                                  ;;(copy-recursively sub-directory target)))
