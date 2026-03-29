@@ -49,7 +49,8 @@
                     ;; https://github.com/Pang-Yatian/Point-MAE/pull/64/files).
                     #:key (gcc gcc) (linux-headers #f))
   (let* ((cuda>=11? (version>=? cuda-version "11"))
-         (cuda>=12.6? (version>=? cuda-version "12.6")))
+         (cuda>=12.6? (version>=? cuda-version "12.6"))
+         (cuda>=13.1? (version>=? cuda-version "13.1")))
     (package
       (name "cuda-toolkit")
       (version cuda-version)
