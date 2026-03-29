@@ -205,9 +205,14 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
                                  (string-append out "/" (basename entry)))
 
                                (when (file-exists? sub-directory)
-                                 (copy-recursively sub-directory target)))
-                             '("bin" "targets/x86_64-linux/lib/lib64"
-                               "targets/x86_64-linux/include/include"
+                                 ;;(copy-recursively sub-directory target)))
+                                 (for-each (lambda (entr)
+                                   (define subdir (string-append subdirectory "/" entr))
+                                   (define trgt (string-append target "/" (basename entr)))
+                                   (copy-recursively subdir trgt))
+                                   (scandir sub-directory (match-lambda ((or "." "..") #f) (_ #t)))))
+                             '("bin" "targets/x86_64-linux/lib"
+                               "targets/x86_64-linux/include"
                                "nvvm/bin" "nvvm/include"
                                "nvvm/lib64")))
 
