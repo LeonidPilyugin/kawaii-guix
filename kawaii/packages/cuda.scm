@@ -49,7 +49,8 @@
                     ;; https://github.com/Pang-Yatian/Point-MAE/pull/64/files).
                     #:key (gcc gcc) (linux-headers #f))
   (let* ((cuda>=11? (version>=? cuda-version "11"))
-         (cuda>=12.6? (version>=? cuda-version "12.6")))
+         (cuda>=12.6? (version>=? cuda-version "12.6"))
+         (cuda>=13? (version>=? cuda-version "13")))
     (package
       (name "cuda-toolkit")
       (version cuda-version)
@@ -74,6 +75,8 @@
         ;; not DT_RUNPATH.
         #:validate-runpath? #f
 
+        #:tests? (not cuda>=13?)
+
         #:phases
         #~(modify-phases %standard-phases
             (replace 'unpack
@@ -95,8 +98,10 @@
                 ;; https://forums.developer.nvidia.com/t/error-exception-specification-is-incompatible-for-cospi-sinpi-cospif-sinpif-with-glibc-2-41/323591?u=epk
                 (let ((math-functions-file
                        (if #$cuda>=11?
-                           "builds/cuda_nvcc/targets/x86_64-linux/include/crt/math_functions.h"
-                           "builds/cuda-toolkit/targets/x86_64-linux/include/crt/math_functions.h")))
+                         (if #$cuda>=13?
+                           "builds/cuda_cudart/targets/x86_64-linux/include/math_functions.h"
+                           "builds/cuda_nvcc/targets/x86_64-linux/include/crt/math_functions.h")
+                         "builds/cuda-toolkit/targets/x86_64-linux/include/crt/math_functions.h")))
                   (substitute* math-functions-file
                     (("extern __DEVICE_FUNCTIONS_DECL__ __device_builtin__ [floatdube]* *[cosin]*pif*\\([doublefat]* x\\)" line)
                      (string-append line " noexcept(true)"))))))
@@ -162,7 +167,9 @@
                                            (_ #t))))
                   ;; 'cicc' needs that directory.
                   (let ((libdevice (if #$cuda>=11?
-                                       "cuda_nvcc/nvvm/libdevice"
+                                       (if #$cuda>=13?
+                                         "libnvvm/nvvm/libdevice"
+                                         "cuda_nvcc/nvvm/libdevice")
                                        "cuda-toolkit/nvvm/libdevice/")))
                     (copy-recursively libdevice
                                       (string-append #$output "/nvvm/libdevice"))))
@@ -324,6 +331,6 @@ libraries for NVIDIA GPUs, all of which are proprietary.")
     (cuda-source
      "https://developer.download.nvidia.com/compute/cuda/13.1.1/local_installers/cuda_13.1.1_590.48.01_linux.run"
      "1r5qvyv0sb8rwb9rb040x46v8739iyj95cq4d11q29vj4cvk5zr4")
-    #:gcc gcc-15))
+    #:gcc gcc-14))
 
 (define-public cuda-13 cuda-13.1)
