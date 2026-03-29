@@ -2,6 +2,7 @@
 
 (define-module (kawaii packages cuda)
   #:use-module (guix-science-nonfree packages cuda)
+  #:use-module (guix-science-nonfree build-system cuda)
   #:use-module (gnu packages gcc)
   #:export (cuda-13))
 
