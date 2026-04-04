@@ -27,7 +27,7 @@
         #:build-type "Release"
       #:phases
       #~(modify-phases %standard-phases
-        (delete 'test)
+        (delete 'check)
       )))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
