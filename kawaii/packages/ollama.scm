@@ -34,7 +34,7 @@
         (delete 'validate-runpath)
         (add-after 'build 'build-go
           (lambda args
-            (invoke 'go-1.23 "build ." "bash"))))))
+            (invoke #+(file-appen go-1.23 "/bin/go") "build" "."))))))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
     (description
