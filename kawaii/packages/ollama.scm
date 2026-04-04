@@ -21,7 +21,7 @@
        (sha256
         (base32 "1ri83pc0v82r1pq7lm5v6qwkmab62nlwm23162p3zcg5smfqy0j1"))))
     (build-system cmake-build-system)
-    (arguments (list #:configure-flags #~(list "-D CMAKE_CUDA_ARCHITECTURES="75;80;86;87;88;89;90;100;103;110;120;121;121-virtual"") #:build-type "Release"))
+    (arguments (list #:configure-flags #~(list "-D CMAKE_CUDA_ARCHITECTURES=\"75;80;86;87;88;89;90;100;103;110;120;121;121-virtual\"") #:build-type "Release"))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
     (description
