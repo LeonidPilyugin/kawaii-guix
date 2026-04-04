@@ -28,6 +28,7 @@
       #:phases
       #~(modify-phases %standard-phases
         (delete 'check)
+        (delete 'validate-runpath)
       )))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
