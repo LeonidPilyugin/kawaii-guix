@@ -7,8 +7,7 @@
   #:use-module (guix build-system go)
   #:use-module (gnu packages golang)
   #:use-module (gnu packages golang-build)
-  #:use-module ((guix licenses)
-                #:prefix license:))
+  #:use-module ((guix licenses) #:prefix license:))
 
 (define-public ollama-nvidia
   (package
@@ -35,7 +34,7 @@
         (delete 'validate-runpath)
         (add-after 'build 'build-go
           (lambda args
-            (invoke go-1.23 "build ." "bash"))))))
+            (invoke 'go-1.23 "build ." "bash"))))))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
     (description
