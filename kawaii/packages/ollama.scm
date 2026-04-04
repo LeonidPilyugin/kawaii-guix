@@ -32,7 +32,7 @@
       #~(modify-phases %standard-phases
         (delete 'check)
         (delete 'validate-runpath)
-        (add-after 'build 'build-go
+        (add-after 'install 'build-go
           (lambda args
             (invoke #+(file-append go-1.23 "/bin/go") "build" #$output))))))
     (home-page "https://ollama.com")
