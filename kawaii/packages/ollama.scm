@@ -24,11 +24,11 @@
       (list
         #:configure-flags
         #~(list "-D CMAKE_CUDA_ARCHITECTURES=\"75;80;86;87;88;89;90;100;103;110;120;121;121-virtual\"")
-        #:build-type "Release")
+        #:build-type "Release"
       #:phases
       #~(modify-phases %standard-phases
         (delete 'test)
-      ))
+      )))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
     (description
