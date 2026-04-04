@@ -3,7 +3,7 @@
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
-  #:use-module (guix build-system go)
+  #:use-module (guix build-system go #:prefix go:)
   #:use-module ((guix licenses)
                 #:prefix license:))
 
@@ -30,7 +30,7 @@
       #~(modify-phases %standard-phases
         (delete 'check)
         (delete 'validate-runpath)
-        (add-after 'build 'build-go go-build)
+        (add-after 'build 'build-go go:go-build)
       )))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
