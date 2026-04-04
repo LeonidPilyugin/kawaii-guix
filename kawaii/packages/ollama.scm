@@ -1,11 +1,10 @@
 (define-module (kawaii packages ollama)
+  #:use-module (guix)
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses)
-                #:prefix license:)
-  #:use-module (gnu packages gcc)
-  #:use-module (gnu packages base))
+                #:prefix license:))
 
 (define-public ollama-nvidia
   (package
