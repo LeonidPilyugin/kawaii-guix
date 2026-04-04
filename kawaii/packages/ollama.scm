@@ -20,7 +20,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32 "1ri83pc0v82r1pq7lm5v6qwkmab62nlwm23162p3zcg5smfqy0j1"))))
-    (build-system cmake-build-system)
+    (build-system go-build-system)
     (arguments
       (list
         #:configure-flags
@@ -30,8 +30,9 @@
       #~(modify-phases %standard-phases
         (delete 'check)
         (delete 'validate-runpath)
-        (add-after 'build 'build-go go:go-build)
-      )))
+        (add-after 'build 'build-go
+          (lambda _
+            (let ((go (which "go"))) (invoke go "build .")))))))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
     (description
