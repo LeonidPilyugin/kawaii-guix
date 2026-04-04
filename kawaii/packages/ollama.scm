@@ -19,7 +19,7 @@
        (file-name (git-file-name name version))
        (sha256
         (base32 "1ri83pc0v82r1pq7lm5v6qwkmab62nlwm23162p3zcg5smfqy0j1"))))
-    (build-system go-build-system)
+    (build-system cmake-build-system)
     (arguments
       (list
         #:configure-flags
