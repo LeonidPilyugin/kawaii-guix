@@ -7,6 +7,7 @@
   #:use-module (guix build-system go)
   #:use-module (gnu packages golang)
   #:use-module (gnu packages golang-build)
+  #:use-module (gnu packages cmake)
   #:use-module ((guix licenses) #:prefix license:))
 
 (define-public ollama-nvidia
