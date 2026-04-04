@@ -1,7 +1,7 @@
 (define-module (kawaii packages ollama)
   #:use-module (guix packages)
   #:use-module (guix git-download)
-  #:use-module (nonguix build-system binary)
+  #:use-module (nonguix build-system cmake)
   #:use-module ((guix licenses)
                 #:prefix license:)
   #:use-module (gnu packages gcc)
