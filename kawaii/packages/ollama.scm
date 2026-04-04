@@ -33,7 +33,7 @@
       #~(modify-phases %standard-phases
         (delete 'check)
         (delete 'validate-runpath)
-        (add-after 'build 'build-go go-build))))
+        (add-after 'build 'build-go (lambda args (go-build args))))))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
     (description
