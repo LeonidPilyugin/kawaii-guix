@@ -3,13 +3,14 @@
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix build-system cmake)
+  #:use-module (guix build-system go)
   #:use-module ((guix licenses)
                 #:prefix license:))
 
 (define-public ollama-nvidia
   (package
     (name "ollama-nvidia")
-    (version "0.18.4")
+    (version "0.20.0")
     (source
      (origin
        (method git-fetch)
@@ -29,9 +30,7 @@
       #~(modify-phases %standard-phases
         (delete 'check)
         (delete 'validate-runpath)
-        (add-after 'build 'build-go
-          (lambda _
-            (let ((go (which "go"))) (invoke go "build .")))))))
+        (add-after 'build 'build-go go-build))))
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
     (description
