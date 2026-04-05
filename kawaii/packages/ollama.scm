@@ -23,25 +23,22 @@
        (file-name (git-file-name name version))
        (sha256
         (base32 "1ri83pc0v82r1pq7lm5v6qwkmab62nlwm23162p3zcg5smfqy0j1"))))
-    (build-system cmake-build-system)
+    (build-system go-build-system)
     (arguments
       (list
-        #:configure-flags
-        #~(list "-D CMAKE_CUDA_ARCHITECTURES=\"75;80;86;87;88;89;90;100;103;110;120;121;121-virtual\"")
-        #:build-type "Release"
+        #:tests? #f
+        #:go go-1.23
+        #:install-source? #f
       #:phases
       #~(modify-phases %standard-phases
-        (delete 'check)
-        (delete 'validate-runpath)
-        (replace 'build
+        (add-before 'build 'build-cmake
           (lambda args
             (invoke "pwd")
             (invoke "ls")
             (invoke #+(file-append cmake-minimal "/bin/cmake")
               "-B" "build" "-D" "CMAKE_BUILD_TYPE=Release"
               "-D" "CMAKE_CUDA_ARCHITECTURES=\"50;52;53;60;61;62;70;72;75;80;86;87;89;90;90a\"")
-            (invoke #+(file-append cmake-minimal "/bin/cmake" "--build" "build"))
-            (invoke #+(file-append go-1.23 "/bin/go") "build" "."))))))
+            (invoke #+(file-append cmake-minimal "/bin/cmake" "--build" "build")))))))
 
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
