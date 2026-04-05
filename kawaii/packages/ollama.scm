@@ -26,6 +26,7 @@
     (build-system trivial-build-system)
     (arguments
       `(#:modules ((guix)
+                   (guix licenses)
                    (guix build utils)
                    (gnu packages golang)
                    (gnu packages cmake))
@@ -33,6 +34,7 @@
         (begin
           (use-modules
             (guix)
+            (guix licenses)
             (guix build utils)
             (gnu packages golang)
             (gnu packages cmake))
