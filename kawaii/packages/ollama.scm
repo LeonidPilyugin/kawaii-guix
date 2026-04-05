@@ -3,8 +3,7 @@
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix git-download)
-  #:use-module (guix build-system cmake)
-  #:use-module (guix build-system go)
+  #:use-module (guix build-system trivial)
   #:use-module (gnu packages golang)
   #:use-module (gnu packages golang-build)
   #:use-module (gnu packages cmake)
@@ -23,22 +22,20 @@
        (file-name (git-file-name name version))
        (sha256
         (base32 "1ri83pc0v82r1pq7lm5v6qwkmab62nlwm23162p3zcg5smfqy0j1"))))
-    (build-system go-build-system)
+    (build-system trivial-build-system)
     (arguments
       (list
-        #:tests? #f
-        #:go go-1.23
-        #:install-source? #f
-      #:phases
-      #~(modify-phases %standard-phases
-        (add-before 'build 'build-cmake
-          (lambda args
-            (invoke "pwd")
-            (invoke "ls")
-            (invoke #+(file-append cmake-minimal "/bin/cmake")
-              "-B" "build" "-D" "CMAKE_BUILD_TYPE=Release"
-              "-D" "CMAKE_CUDA_ARCHITECTURES=\"50;52;53;60;61;62;70;72;75;80;86;87;89;90;90a\"")
-            (invoke #+(file-append cmake-minimal "/bin/cmake" "--build" "build")))))))
+        #:builder
+        (begin
+          (use-modules (guix build utils))
+          (invoke #+(file-append cmake-minimal "/bin/cmake")
+            "-B" "build" "-D" "CMAKE_BUILD_TYPE=Release"
+            "-D" "CMAKE_CUDA_ARCHITECTURES=\"50;52;53;60;61;62;70;72;75;80;86;87;89;90;90a\"")
+          (invoke #+(file-append cmake-minimal "/bin/cmake" "--build" "build"))
+          (invoke go-1.23 "build" ".")
+          (setenv "DESTDIR" #output)
+          (invoke #+(file-append cmake-minimal "/bin/cmake")
+            "--install" "ollama/build" "--component" "CUDA"))))
 
     (home-page "https://ollama.com")
     (synopsis "Get up and running with large language models")
