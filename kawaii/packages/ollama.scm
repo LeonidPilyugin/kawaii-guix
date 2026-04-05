@@ -26,6 +26,7 @@
     (build-system trivial-build-system)
     (arguments
       `(#:modules ((guix)
+                   (guix config)
                    (guix utils)
                    (guix licenses)
                    (guix packages)
@@ -36,6 +37,7 @@
         (begin
           (use-modules
             (guix)
+            (guix config)
             (guix utils)
             (guix packages)
             (guix licenses)
