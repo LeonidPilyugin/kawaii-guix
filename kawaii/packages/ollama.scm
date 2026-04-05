@@ -2,6 +2,7 @@
   #:use-module (guix)
   #:use-module (guix gexp)
   #:use-module (guix packages)
+  #:use-module (guix build utils)
   #:use-module (guix git-download)
   #:use-module (guix build-system trivial)
   #:use-module (gnu packages golang)
@@ -28,17 +29,10 @@
         #:builder
         (begin
           (use-modules
-            (guix)
             (guix gexp)
-            (guix packages)
-            (guix utils)
             (guix build utils)
             (gnu packages golang)
-            (gnu packages golang-build)
-            (gnu packages cmake)
-            (srfi srfi-1)
-            (ice-9 popen)
-            (ice-9 rdelim))
+            (gnu packages cmake))
           (invoke #+(file-append cmake-minimal "/bin/cmake")
             "-B" "build" "-D" "CMAKE_BUILD_TYPE=Release"
             "-D" "CMAKE_CUDA_ARCHITECTURES=\"50;52;53;60;61;62;70;72;75;80;86;87;89;90;90a\"")
