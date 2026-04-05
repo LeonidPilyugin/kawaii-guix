@@ -25,9 +25,13 @@
         (base32 "1ri83pc0v82r1pq7lm5v6qwkmab62nlwm23162p3zcg5smfqy0j1"))))
     (build-system trivial-build-system)
     (arguments
-      (list
+      `(#:modules ((guix build utils))
         #:builder
         (begin
+          (use-modules
+            (guix build utils)
+            (gnu packages golang)
+            (gnu packages cmake))
           (invoke #+(file-append cmake-minimal "/bin/cmake")
             "-B" "build" "-D" "CMAKE_BUILD_TYPE=Release"
             "-D" "CMAKE_CUDA_ARCHITECTURES=\"50;52;53;60;61;62;70;72;75;80;86;87;89;90;90a\"")
