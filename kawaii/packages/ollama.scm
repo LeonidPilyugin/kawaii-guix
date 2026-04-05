@@ -35,6 +35,7 @@
         (delete 'validate-runpath)
         (replace 'build
           (lambda args
+            (invoke "ls")
             (invoke #+(file-append cmake-minimal "/bin/cmake")
               "-B" "build" "-D" "CMAKE_BUILD_TYPE=Release"
               "-D" "CMAKE_CUDA_ARCHITECTURES=\"50;52;53;60;61;62;70;72;75;80;86;87;89;90;90a\"")
