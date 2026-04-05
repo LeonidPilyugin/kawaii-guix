@@ -27,7 +27,14 @@
       (list
         #:builder
         (begin
-          (use-modules (guix build utils))
+          (use-modules
+            (guix)
+            (guix gexp)
+            (guix packages)
+            (guix packages golang)
+            (guix packages golang-build)
+            (guix packages cmake)
+            (guix build utils))
           (invoke #+(file-append cmake-minimal "/bin/cmake")
             "-B" "build" "-D" "CMAKE_BUILD_TYPE=Release"
             "-D" "CMAKE_CUDA_ARCHITECTURES=\"50;52;53;60;61;62;70;72;75;80;86;87;89;90;90a\"")
