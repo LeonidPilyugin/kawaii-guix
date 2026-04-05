@@ -33,7 +33,7 @@
             "-D" "CMAKE_CUDA_ARCHITECTURES=\"50;52;53;60;61;62;70;72;75;80;86;87;89;90;90a\"")
           (invoke #+(file-append cmake-minimal "/bin/cmake" "--build" "build"))
           (invoke go-1.23 "build" ".")
-          (setenv "DESTDIR" #output)
+          (setenv "DESTDIR" %outputs)
           (invoke #+(file-append cmake-minimal "/bin/cmake")
             "--install" "ollama/build" "--component" "CUDA"))))
 
