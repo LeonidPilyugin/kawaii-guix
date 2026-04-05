@@ -27,6 +27,7 @@
     (arguments
       `(#:modules ((guix)
                    (guix licenses)
+                   (guix packages)
                    (guix build utils)
                    (gnu packages golang)
                    (gnu packages cmake))
@@ -34,6 +35,7 @@
         (begin
           (use-modules
             (guix)
+            (guix packages)
             (guix licenses)
             (guix build utils)
             (gnu packages golang)
