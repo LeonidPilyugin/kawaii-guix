@@ -25,12 +25,14 @@
         (base32 "1ri83pc0v82r1pq7lm5v6qwkmab62nlwm23162p3zcg5smfqy0j1"))))
     (build-system trivial-build-system)
     (arguments
-      `(#:modules ((guix build utils)
+      `(#:modules ((guix)
+                   (guix build utils)
                    (gnu packages golang)
                    (gnu packages cmake))
         #:builder
         (begin
           (use-modules
+            (guix)
             (guix build utils)
             (gnu packages golang)
             (gnu packages cmake))
