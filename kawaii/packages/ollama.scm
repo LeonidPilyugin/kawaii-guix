@@ -35,6 +35,7 @@
         (delete 'validate-runpath)
         (replace 'build
           (lambda args
+            (invoke "pwd")
             (invoke "ls")
             (invoke #+(file-append cmake-minimal "/bin/cmake")
               "-B" "build" "-D" "CMAKE_BUILD_TYPE=Release"
