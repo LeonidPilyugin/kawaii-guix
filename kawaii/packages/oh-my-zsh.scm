@@ -93,7 +93,7 @@
 
 (define-public kawaii-zsh-autosuggestions
   (package
-    (inherit zsh-syntax-autosuggestions)
+    (inherit zsh-autosuggestions)
     (name "kawaii-zsh-autosuggestions")
     (native-inputs
      (list ruby
