@@ -7,6 +7,8 @@
   #:use-module (gnu packages shellutils)
   #:use-module (gnu packages base)
   #:use-module (gnu packages shells)
+  #:use-module (gnu packages tmux)
+  #:use-module (gnu packages ruby)
   #:use-module (guix git))
 
 (define-public oh-my-zsh
@@ -87,3 +89,37 @@
               (when tests?
                 (invoke "make" "test" (string-append "ZSH=" #$zsh "/bin/zsh"))
                 (invoke "make" "perf" (string-append "ZSH=" #$zsh "/bin/zsh"))))))))))
+
+
+(define-public zsh-autosuggestions
+  (package
+    (native-inputs
+     (list ruby
+           ruby-pry
+           ruby-rspec
+           ruby-rspec-wait
+           tmux
+           zsh
+           oh-my-zsh))
+    (arguments
+     (list
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'unpack 'patch-tests
+            (lambda _
+              ;; Failing tests since tmux-3.2a
+              (delete-file "spec/options/buffer_max_size_spec.rb")))
+          (delete 'configure)
+          (replace 'check ; Tests use ruby's bundler; instead execute rspec directly.
+            (lambda _
+              (setenv "TMUX_TMPDIR" (getenv "TMPDIR"))
+              (setenv "SHELL" (which "zsh"))
+              (invoke "rspec")))
+          (replace 'install
+            (lambda* (#:key outputs #:allow-other-keys)
+              (let* ((out (assoc-ref outputs "out"))
+                     (zsh-plugins
+                      (string-append out "/share/zsh/plugins/oh-my-zsh/plugins/zsh-autosuggestions")))
+                (invoke "make" "all")
+                (install-file "zsh-autosuggestions.zsh" zsh-plugins)))))))))
+
