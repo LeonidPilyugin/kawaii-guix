@@ -90,7 +90,11 @@
             (lambda* (#:key tests? #:allow-other-keys)
               (when tests?
                 (invoke "make" "test" (string-append "ZSH=" #$zsh "/bin/zsh"))
-                (invoke "make" "perf" (string-append "ZSH=" #$zsh "/bin/zsh"))))))))))
+                (invoke "make" "perf" (string-append "ZSH=" #$zsh "/bin/zsh")))))
+          (add-after 'install 'rename
+            (lambda _ (rename-file
+              "share/zsh/plugins/oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+              "share/zsh/plugins/oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"))))))))
 
 
 (define-public kawaii-zsh-autosuggestions
