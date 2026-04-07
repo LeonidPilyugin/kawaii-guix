@@ -49,5 +49,5 @@
    (arguments
      (list
        #:install-plan
-         #~(list '("files/kawaii.zsh-theme" "share/zsh/plugins/oh-my-zsh/themes/")))))
-   (inputs (list oh-my-zsh)))
+         #~(list '("files/kawaii.zsh-theme" "share/zsh/plugins/oh-my-zsh/themes/"))))
+   (inputs (list oh-my-zsh))))
