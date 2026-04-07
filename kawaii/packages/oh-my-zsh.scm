@@ -5,6 +5,7 @@
   #:use-module (guix build-system copy)
   #:use-module (guix git-download)
   #:use-module (gnu packages shellutils)
+  #:use-module (gnu packages base)
   #:use-module (gnu packages shells)
   #:use-module (guix git))
 
