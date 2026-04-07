@@ -91,8 +91,10 @@
                 (invoke "make" "perf" (string-append "ZSH=" #$zsh "/bin/zsh"))))))))))
 
 
-(define-public zsh-autosuggestions
+(define-public kawaii-zsh-autosuggestions
   (package
+    (inherit zsh-syntax-autosuggestions)
+    (name "kawaii-zsh-autosuggestions")
     (native-inputs
      (list ruby
            ruby-pry
