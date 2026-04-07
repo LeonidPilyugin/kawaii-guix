@@ -49,4 +49,4 @@
    (arguments
      (list
        #:install-plan
-         '("files/kawaii.zsh-theme" "share/zsh/themes/kawaii.zsh-theme")))))
+         (list "files/kawaii.zsh-theme" "share/zsh/themes/")))))
