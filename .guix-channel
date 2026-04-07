@@ -5,7 +5,7 @@
       (name nonguix)
       (url "https://gitlab.com/nonguix/nonguix")
       (introduction
-        (make-channel-introduction
+        (channel-introduction
           (version 0)
           (commit "897c1a470da759236cc11798f4e0a5f7d4d59fbc")
           (openpgp-fingerprint
@@ -14,7 +14,7 @@
       (name guix-science-nonfree)
       (url "https://codeberg.org/guix-science/guix-science-nonfree.git")
       (introduction
-        (make-channel-introduction
+        (channel-introduction
           (version 0)
           (commit "58661b110325fd5d9b40e6f0177cc486a615817e")
           (openpgp-fingerprint
