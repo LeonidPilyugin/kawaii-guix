@@ -4,6 +4,7 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix build-system copy)
   #:use-module (guix git-download)
+  #:use-module (gnu packages shellutils)
   #:use-module (guix git))
 
 (define-public oh-my-zsh
@@ -51,3 +52,36 @@
        #:install-plan
          #~(list '("files/kawaii.zsh-theme" "share/zsh/plugins/oh-my-zsh/themes/"))))
    (inputs (list oh-my-zsh))))
+
+(define-public kawaii-zsh-syntax-highlighting
+  (package
+    (name "kawaii-zsh-syntax-highlighting")
+    (inherit zsh-syntax-highlighting)
+    (native-inputs
+     (list zsh coreutils grep oh-my-zsh))
+    (arguments
+     ;; FIXME: Tests have expected failures (easy way to skip just those tests?)
+     (list
+      #:tests? #f
+      #:phases
+      #~(modify-phases %standard-phases
+          (delete 'configure)
+          (add-after 'unpack 'patch-paths
+            (lambda _
+              (substitute* "Makefile"
+                (("/usr/local") #$output)
+                (("share/\\$\\(NAME\\)") "share/zsh/plugins/oh-my-zsh/plugins/$(NAME)")
+                (("env -i") "env -i PATH=$$PATH"))))
+          (add-after 'patch-paths 'make-writable
+            (lambda _
+              (for-each make-file-writable
+                        '("docs/highlighters.md"
+                          "README.md"))))
+          (add-before 'build 'add-all-md
+            (lambda _
+              (invoke "make" "all")))
+          (replace 'check
+            (lambda* (#:key tests? #:allow-other-keys)
+              (when tests?
+                (invoke "make" "test" (string-append "ZSH=" #$zsh "/bin/zsh"))
+                (invoke "make" "perf" (string-append "ZSH=" #$zsh "/bin/zsh"))))))))))
