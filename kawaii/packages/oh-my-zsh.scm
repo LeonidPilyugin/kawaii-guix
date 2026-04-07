@@ -55,8 +55,8 @@
 
 (define-public kawaii-zsh-syntax-highlighting
   (package
-    (name "kawaii-zsh-syntax-highlighting")
     (inherit zsh-syntax-highlighting)
+    (name "kawaii-zsh-syntax-highlighting")
     (native-inputs
      (list zsh coreutils grep oh-my-zsh))
     (arguments
