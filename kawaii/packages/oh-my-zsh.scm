@@ -50,4 +50,4 @@
      (list
        #:install-plan
          #~(list '("files/kawaii.zsh-theme" "share/zsh/plugins/oh-my-zsh/themes/")))))
-   (inputs oh-my-zsh))
+   (inputs (list oh-my-zsh)))
