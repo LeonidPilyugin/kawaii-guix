@@ -9,6 +9,8 @@
   #:use-module (gnu packages shells)
   #:use-module (gnu packages tmux)
   #:use-module (gnu packages ruby)
+  #:use-module (gnu packages ruby-xyz)
+  #:use-module (gnu packages ruby-check)
   #:use-module (guix git))
 
 (define-public oh-my-zsh
