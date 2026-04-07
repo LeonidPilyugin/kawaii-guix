@@ -125,6 +125,6 @@
                      (zsh-plugins
                       (string-append out "/share/zsh/plugins/oh-my-zsh/plugins/zsh-autosuggestions")))
                 (invoke "make" "all")
-                (mkdir zsh-plugins)
+                (mkdir-p zsh-plugins)
                 (copy-file "zsh-autosuggestions.zsh" (string-append zsh-plugins "/zsh-autosuggestions.plugin.zsh"))))))))))
 
