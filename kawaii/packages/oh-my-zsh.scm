@@ -45,6 +45,7 @@
    (synopsis "Kawaii zsh theme")
    (description "This package provides kawaii zsh theme.")
    (license license:expat-0)
+   (home-page "https://github.com/LeonidPilyugin/kawaii-oh-my-zsh")
    (arguments
      (list
        #:install-plan
