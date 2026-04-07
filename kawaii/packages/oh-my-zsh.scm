@@ -1,4 +1,4 @@
-(define-module (kawaii packages zsh)
+(define-module (kawaii packages oh-my-zsh)
   #:use-module (guix packages)
   #:use-module (guix gexp)
   #:use-module ((guix licenses) #:prefix license:)
