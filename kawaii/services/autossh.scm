@@ -91,6 +91,7 @@
                                 (autossh-configuration-port config)))))
    (respawn? #t)
    (respawn-limit #f)
+   (respawn-delay 1)
    (stop #~(make-kill-destructor))))
 
 (define (autossh-service-activation config)
