@@ -89,6 +89,7 @@
                                 (autossh-configuration-message config))
                #$(string-append "AUTOSSH_PORT="
                                 (autossh-configuration-port config)))))
+   (auto-start? #t)
    (stop #~(make-kill-destructor))))
 
 (define (autossh-service-activation config)
