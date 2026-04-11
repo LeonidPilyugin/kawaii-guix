@@ -17,6 +17,7 @@
   #:use-module (ice-9 vlist)
 
   #:export (autossh-service-type
+            autossh-configuration
             autossh-service))
 
 (define (autossh-file-name config file)
