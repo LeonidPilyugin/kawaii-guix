@@ -54,7 +54,7 @@
   (shepherd-service
    (documentation "Automatically set up ssh connections (and keep them alive).")
    (provision '(autossh))
-   (requirement '(user-processes ssh))
+   (requirement '(user-processes networking))
    (start #~(make-forkexec-constructor
              (list #$(file-append autossh "/bin/autossh")
                    #$@(autossh-configuration-ssh-options config))
