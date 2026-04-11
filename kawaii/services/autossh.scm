@@ -1,9 +1,21 @@
 (define-module (kawaii services autossh)
   #:use-module (guix gexp)
-  #:use-module (gnu packages)
   #:use-module (gnu services)
   #:use-module (gnu services shepherd)
   #:use-module (gnu packages ssh)
+  #:use-module (gnu packages admin)
+  #:use-module (gnu services)
+  #:use-module (gnu services web)
+  #:use-module (gnu system pam)
+  #:use-module (gnu system shadow)
+  #:use-module (guix deprecation)
+  #:use-module (guix records)
+  #:use-module (guix modules)
+  #:use-module (srfi srfi-1)
+  #:use-module (srfi srfi-26)
+  #:use-module (ice-9 match)
+  #:use-module (ice-9 vlist)
+
   #:export (autossh-service-type
             autossh-service))
 
