@@ -54,7 +54,7 @@
   (shepherd-service
    (documentation "Automatically set up ssh connections (and keep them alive).")
    (provision '(autossh))
-   (requirement '(user-processes sing-box))
+   (requirement '(networking))
    (start #~(make-forkexec-constructor
              (list #$(file-append autossh "/bin/autossh")
                    #$@(autossh-configuration-ssh-options config))
@@ -89,7 +89,8 @@
                                 (autossh-configuration-message config))
                #$(string-append "AUTOSSH_PORT="
                                 (autossh-configuration-port config)))))
-   (auto-start? #t)
+   (respawn? #t)
+   (respawn-limit #f)
    (stop #~(make-kill-destructor))))
 
 (define (autossh-service-activation config)
