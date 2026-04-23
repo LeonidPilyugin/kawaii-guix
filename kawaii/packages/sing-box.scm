@@ -120,7 +120,7 @@
     (native-inputs
      (append
       (list (origin
-              (method (go-mod-vendor #:go go-1.23))
+              (method (go-mod-vendor #:go go-1.22))
               (uri (package-source this-package))
               (file-name "vendored-go-dependencies")
               (sha256
