@@ -62,7 +62,7 @@
     (arguments
      (list
       #:tests? (not (%current-target-system)) ;TODO: Run test suite.
-      #:go go-1.23
+      #:go go-1.22
       #:install-source? #f
       #:import-path "./cmd/sing-box"
       #:build-flags
