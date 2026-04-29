@@ -48,7 +48,7 @@
 (define-public sing-box
   (package
     (name "sing-box")
-    (version "1.12.22")
+    (version "1.13.8")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -57,24 +57,23 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0wr97myxdskqlh1mrpn0rnnvdkifaqnm420j3y6hbk9rf4ijzf3l"))))
+                "0idl0j3f603b3zrs5yzby4bfm8rjs8npymkl9kjs35gqak78v4c1"))))
     (build-system go-build-system)
     (arguments
      (list
-      #:tests? (not (%current-target-system)) ;TODO: Run test suite.
-      #:go go-1.22
+      #:go go-1.26
       #:install-source? #f
       #:import-path "./cmd/sing-box"
       #:build-flags
       #~(list "-tags" (string-join
-                       '("with_gvisor"
-                         "with_quic"
+                       '("with_quic"
                          "with_dhcp"
                          "with_wireguard"
+                         "with_tailscale"
                          "with_utls"
                          "with_acme"
                          "with_clash_api"
-                         "with_tailscale"))
+                         "with_gvisor"))
               (string-append
                "-ldflags="
                " -X github.com/sagernet/sing-box/constant.Version="
@@ -120,12 +119,12 @@
     (native-inputs
      (append
       (list (origin
-              (method (go-mod-vendor #:go go-1.22))
+              (method (go-mod-vendor #:go go-1.26))
               (uri (package-source this-package))
               (file-name "vendored-go-dependencies")
               (sha256
                (base32
-                "0h3m4rfkwdcm22f8vbdl3idki46nxfmynagvy7s00lycylz1f809"))))
+                "1binghhm6nvgfpj5zay0xnvlay2f015kd28llgm118q5bwlsh27a"))))
       (if (%current-target-system)
           (list this-package)
           '())))
