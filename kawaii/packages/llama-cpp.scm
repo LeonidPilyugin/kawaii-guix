@@ -72,5 +72,5 @@
                   (("^#!.*/bin/python3")
                    (string-append "#!" (search-input-file inputs "bin/env")
                                   " python3"))))))))
-  (inputs (list coreutils ggml openssl cuda-12.8 nvda))
+  (inputs (list coreutils ggml openssl cuda-12.8 nvda-595))
   (native-inputs (list python python-jinja2))))
