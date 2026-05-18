@@ -42,8 +42,8 @@
                   (("set_tests_properties\\(test-download-model.*")
                    (string-append "set_tests_properties(test-download-model "
                                   " PROPERTIES DISABLED TRUE)"))
-                  (("llama_build_and_test\\(test-chat.cpp.*")
-                   "")
+                  ;; (("llama_build_and_test\\(test-chat.cpp.*")
+                  ;; "")
                   ;; error while handling argument "-m": expected value for
                   ;; argument
                   (("llama_build_and_test\\(test-arg-parser.cpp.*")
