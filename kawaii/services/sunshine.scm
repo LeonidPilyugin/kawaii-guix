@@ -7,7 +7,7 @@
   #:use-module (gnu services shepherd)
   #:use-module (gnu services base)
   #:use-module (gnu system privilege)
-  #:use-module (kawaii packages streaming)
+  #:use-module (kawaii packages sunshine)
   #:use-module (ice-9 match)
   #:export (sunshine-service-type
             sunshine-configuration))
