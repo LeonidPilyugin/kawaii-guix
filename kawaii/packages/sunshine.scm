@@ -115,7 +115,7 @@
           (add-after 'install 'setcap
             (lambda _
               (invoke "ls" "-lah")
-              (invoke "setcap" "cap_sys_admin+p" (in0vicinity #$output "bin/sunshine-2025.924.154138")))))))
+              (invoke "setcap" "cap_sys_admin+p" (in-vicinity #$output "bin/sunshine-2025.924.154138")))))))
     (inputs
      (list
       eudev
