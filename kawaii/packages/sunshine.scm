@@ -115,7 +115,7 @@
           (add-after 'build 'setcap
             (lambda _
               (invoke "ls" "-lah")
-              (invoke "setcap" "cap_sys_admin+p" "sunshine-2025.924.154138"))))))
+              (system* (string-append libcap "/sbin/setcap") "cap_sys_admin+p" "sunshine-2025.924.154138"))))))
     (inputs
      (list
       eudev
