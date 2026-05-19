@@ -112,10 +112,10 @@
                 (for-each (lambda (bin)
                             (patch-shebang (string-append "node_modules/.bin/" (readlink bin))))
                             (find-files "node_modules/.bin" ".*")))))
-          (add-after 'build 'setcap
+          (add-after 'install 'setcap
             (lambda _
               (invoke "ls" "-lah")
-              (system* (string-append libcap "/sbin/setcap") "cap_sys_admin+p" "sunshine-2025.924.154138"))))))
+              (invoke "setcap" "cap_sys_admin+p" (in0vicinity #$output "bin/sunshine-2025.924.154138")))))))
     (inputs
      (list
       eudev
