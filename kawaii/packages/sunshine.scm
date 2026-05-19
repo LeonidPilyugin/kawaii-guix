@@ -111,11 +111,7 @@
                 (invoke "npm" "ci" "--offline")
                 (for-each (lambda (bin)
                             (patch-shebang (string-append "node_modules/.bin/" (readlink bin))))
-                            (find-files "node_modules/.bin" ".*")))))
-          (add-after 'install 'setcap
-            (lambda _
-              (invoke "ls" "-lah")
-              (invoke "setcap" "cap_sys_admin+p" (in-vicinity #$output "bin/sunshine-2025.924.154138")))))))
+                            (find-files "node_modules/.bin" ".*"))))))))
     (inputs
      (list
       eudev
