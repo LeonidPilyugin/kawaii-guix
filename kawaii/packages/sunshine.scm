@@ -114,9 +114,7 @@
                             (find-files "node_modules/.bin" ".*")))))
           (add-after 'build 'setcap
             (lambda _
-              (invoke "ls")
-              (invoke "ls" "build")
-              (invoke "setcap" "cap_sys_admin+p" "build/sunshine-2025.924.154138"))))))
+              (invoke "setcap" "cap_sys_admin+p" "sunshine-2025.924.154138"))))))
     (inputs
      (list
       eudev
