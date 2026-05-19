@@ -111,7 +111,10 @@
                 (invoke "npm" "ci" "--offline")
                 (for-each (lambda (bin)
                             (patch-shebang (string-append "node_modules/.bin/" (readlink bin))))
-                            (find-files "node_modules/.bin" ".*"))))))))
+                            (find-files "node_modules/.bin" ".*")))))
+          (add-after 'build 'setcap
+            (lambda _
+              (invoke "setcap" "cap_sys_admin+p" "build/sunshine"))))))
     (inputs
      (list
       eudev
@@ -155,6 +158,7 @@
 (define-public sunshine-nvfbc
   (package
     (inherit sunshine)
+    (name "sunshine-nvfbc")
     (arguments
      (substitute-keyword-arguments (package-arguments sunshine)
        ((#:configure-flags flags)
