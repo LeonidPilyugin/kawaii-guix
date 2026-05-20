@@ -77,7 +77,8 @@
        python
        python-pygobject
        python-pyyaml
-       gdk-pixbuf))
+       gdk-pixbuf
+       gtk+))
    (home-page "https://lutris.net")
    (synopsis "Open gaming platform for Linux")
    (description "Lutris is an open gaming platform for Linux that provides a unified interface for installing, configuring, and launching games.")
