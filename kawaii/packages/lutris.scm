@@ -7,7 +7,6 @@
   #:use-module (guix build-system gnu)
   #:use-module (gnu packages python)
   #:use-module (gnu packages glib)
-  #:use-module (guix-science-nonfree packages cuda-modules)
   #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages base))
 

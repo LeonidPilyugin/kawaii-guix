@@ -33,6 +33,7 @@
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages linux)
   #:use-module (guix-science-nonfree packages cuda)
+  #:use-module (guix-science-nonfree packages cuda-modules)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (nonguix build-system binary)
   #:use-module (nongnu packages nvidia))
