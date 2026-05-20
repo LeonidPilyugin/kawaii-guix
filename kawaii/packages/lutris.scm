@@ -6,6 +6,7 @@
   #:use-module (guix gexp)
   #:use-module (guix build-system gnu)
   #:use-module (gnu packages python)
+  #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages base))
 
 (define-public lutris
@@ -62,8 +63,8 @@
 					 )))
 		     )))
    (inputs `(("python" ,python)
-	     ("python-pyyaml" ,python-pyyaml)
-	     ("python-pygobject" ,python-pygobject)
+	     ("python-pyyaml", python-pyyaml)
+	     ("python-pygobject", python-pygobject)
 	     ;; Add more dependencies
 	     ;; @see https://github.com/lutris/lutris/blob/master/INSTALL.rst
 	     ))
