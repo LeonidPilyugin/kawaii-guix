@@ -6,6 +6,7 @@
   #:use-module (guix gexp)
   #:use-module (guix build-system gnu)
   #:use-module (gnu packages python)
+  #:use-module (gnu packages glib)
   #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages base))
 
