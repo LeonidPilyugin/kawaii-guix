@@ -78,6 +78,7 @@
        python-pygobject
        python-pyyaml
        gdk-pixbuf
+       gobject-introspection
        gtk+))
    (home-page "https://lutris.net")
    (synopsis "Open gaming platform for Linux")
