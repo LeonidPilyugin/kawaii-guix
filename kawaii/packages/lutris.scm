@@ -7,6 +7,7 @@
   #:use-module (guix build-system gnu)
   #:use-module (gnu packages python)
   #:use-module (gnu packages glib)
+  #:use-module (gnu packages gtk)
   #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages base))
 
@@ -69,7 +70,11 @@
 	     ;; Add more dependencies
 	     ;; @see https://github.com/lutris/lutris/blob/master/INSTALL.rst
 	     ))
-   (native-inputs `(("tar" ,tar)))
+   (native-inputs `(("tar" ,tar)
+     ("python-pygobject" python-pygobject)
+     ("python-pyyaml" python-pyyaml)
+     ("python" python)
+     ("gdk-pixbuf" gdk-pixbuf)))
    (home-page "https://lutris.net")
    (synopsis "Open gaming platform for Linux")
    (description "Lutris is an open gaming platform for Linux that provides a unified interface for installing, configuring, and launching games.")
