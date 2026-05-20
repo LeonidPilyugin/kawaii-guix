@@ -71,11 +71,13 @@
 	     ;; Add more dependencies
 	     ;; @see https://github.com/lutris/lutris/blob/master/INSTALL.rst
 	     ))
-   (native-inputs `(("tar", tar)
-         ("python" ,python)
-	     ("python-pyyaml" ,python-pyyaml)
-	     ("python-pygobject" ,python-pygobject)
-         ("gdk-pixbuf" ,gdk-pixbuf)))
+   (native-inputs `(("tar", tar)))
+   (propagated-inputs
+     (list
+       python
+       python-pygobject
+       python-pyyaml
+       gdk-pixbuf))
    (home-page "https://lutris.net")
    (synopsis "Open gaming platform for Linux")
    (description "Lutris is an open gaming platform for Linux that provides a unified interface for installing, configuring, and launching games.")
