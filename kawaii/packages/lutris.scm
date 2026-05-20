@@ -75,6 +75,7 @@
    (propagated-inputs
      (list
        python
+       python-requests
        python-pygobject
        python-pyyaml
        gdk-pixbuf
